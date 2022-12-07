@@ -16,7 +16,7 @@ const [loading, setLoading] = useState(true);
   //   setData(data.filter((item) => item.id !== id));
   // };
 
-  console.log(data);
+ 
   useEffect(()=> {
     setLoading(true);
     setData(AttendenceData)
@@ -30,7 +30,7 @@ const [loading, setLoading] = useState(true);
       
       
     //   setData(dta);
-    //   setLoading(false);
+      setLoading(false);
     // })
   }, [])
 
@@ -48,7 +48,7 @@ const [loading, setLoading] = useState(true);
 
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Report",
       width: 200,
       renderCell: (params) => {
         return (
@@ -70,7 +70,7 @@ const [loading, setLoading] = useState(true);
         loading ? <p>Loading... | Please Wait</p>: (
           <>
             <div className="datatableTitle">
-                All Incident
+                Attedence List
                 <Link to="/create-students" className="link">
                   Add New
                 </Link>

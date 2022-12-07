@@ -7,7 +7,9 @@ import TakeTrainingData from "../components/attendence/TakeTrainingData"
 import Sidebar from "./sidebar/SideBar";
 import Navbar from "./navbar/Navbar";
 import ViewAttendence from "./attendence/ViewAttendence"
-
+import AllStudents from "../components/student/AllStudents"
+import CreateStudent from "./student/CreateStrudents";
+import Dashboard from "./dashboard/Dashboard"
 
 // //Landing page
 // import LandingPage from "./homepage/LandingPage";
@@ -48,6 +50,11 @@ function AllPages() {
           <div>
             <Switch>
             <Route
+                path="/"
+                exact
+                component={Dashboard}
+              />
+            <Route
                 path="/take-attendance"
                 exact
                 component={TakeAttendence}
@@ -61,6 +68,16 @@ function AllPages() {
                 path="/view-attendence"
                 exact
                 component={ViewAttendence}
+              />
+              <Route
+                path="/all-students"
+                exact
+                component={AllStudents}
+              />
+               <Route
+                path="/create-student"
+                exact
+                component={CreateStudent}
               />
               {/* <Route
                 path="/"
