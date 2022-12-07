@@ -4,36 +4,13 @@ import { useState } from "react";
 import axios from "axios";
 //import { WriteFile } from "./WriteFile";
 
-const getPackage = (height, width) => {
-  const area = width * height;
 
-  let packaging = "";
-
-  if (area <= 100) {
-    packaging = "small";
-  }
-
-  if (area > 100 && area < 500) {
-    packaging = "medium";
-  }
-
-  if (area >= 500) {
-    packaging = "large";
-  }
-
-  return packaging;
-};
-
-export default function ProductClassification() {
+export default function TakeAttendence() {
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
-  const [dimension, setDimension] = React.useState({
-    height: 0,
-    width: 0,
-  });
+  
 
   const [loading, setLoading] = useState(false);
-  const [packageSize, setPackageSize] = useState("");
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -64,12 +41,7 @@ export default function ProductClassification() {
           },
         }
       );
-      setDimension({
-        height: res.data.height,
-        width: res.data.width,
-      });
-      const packaging = getPackage(res.data.height, res.data.width);
-      setPackageSize(packaging);
+    
       setLoading(false);
       console.log(res.data);
     } catch (err) {

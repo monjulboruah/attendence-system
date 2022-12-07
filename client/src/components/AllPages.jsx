@@ -2,29 +2,32 @@ import React, { useContext } from "react";
 import { GlobalState } from "../GlobalState";
 import "./allpages.scss";
 import { Switch, Route } from "react-router-dom";
-import Sidebar from "./sidebar/Sidebar";
+import TakeAttendence from "../components/attendence/TakeAttendence"
+import TakeTrainingData from "../components/attendence/TakeTrainingData"
+// import Sidebar from "./sidebar/Sidebar";
 import Navbar from "./navbar/Navbar";
 
-//Landing page
-import LandingPage from "./homepage/LandingPage";
-import Home from "../pages/home/Home";
-//auth
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
+// //Landing page
+// import LandingPage from "./homepage/LandingPage";
+// import Home from "../pages/home/Home";
+// //auth
+// import Login from "../pages/auth/Login";
+// import Register from "../pages/auth/Register";
 import Loading from "../utils/Loading";
 
-//incident
-import AllIncident from "./incident/AllIncident";
-import CreateIncident from "./incident/CreateIncident";
-import EditIncident from "./incident/EditIncident";
-import MyIncident from "./incident/MyIncident";
 
-//zone
-import AllZones from "./zone/AllZones";
-import CreateZone from "./zone/CreateZone";
+// //incident
+// import AllIncident from "./incident/AllIncident";
+// import CreateIncident from "./incident/CreateIncident";
+// import EditIncident from "./incident/EditIncident";
+// import MyIncident from "./incident/MyIncident";
 
-//product-classification
-import ProductClassification from "./productclassification/ProductClassification";
+// //zone
+// import AllZones from "./zone/AllZones";
+// import CreateZone from "./zone/CreateZone";
+
+// //product-classification
+// import ProductClassification from "./productclassification/ProductClassification";
 
 function AllPages() {
   const state = useContext(GlobalState);
@@ -35,12 +38,22 @@ function AllPages() {
   return (
     <>
       <div className="home">
-        {isLoggedIn ? <Sidebar /> : <></>}
+        {/* {isLoggedIn ? <Sidebar /> : <></>} */}
         <div className="homeContainer">
           {isLoggedIn ? <Navbar /> : <></>}
           <div>
             <Switch>
-              <Route
+            <Route
+                path="/test"
+                exact
+                component={TakeAttendence}
+              />
+               <Route
+                path="/test2"
+                exact
+                component={TakeTrainingData}
+              />
+              {/* <Route
                 path="/"
                 exact
                 component={isLoggedIn ? Home : LandingPage}
@@ -97,7 +110,7 @@ function AllPages() {
                 path="/product-classification"
                 exact
                 component={ProductClassification}
-              />
+              /> */}
 
               <Route path="*" exact component={Loading} />
             </Switch>

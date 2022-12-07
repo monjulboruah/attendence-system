@@ -2,43 +2,22 @@ import React from "react";
 import Webcam from "react-webcam";
 import { useState } from "react";
 import axios from "axios";
-//import { WriteFile } from "./WriteFile";
 
-const getPackage = (height, width) => {
-  const area = width * height;
 
-  let packaging = "";
-
-  if (area <= 100) {
-    packaging = "small";
-  }
-
-  if (area > 100 && area < 500) {
-    packaging = "medium";
-  }
-
-  if (area >= 500) {
-    packaging = "large";
-  }
-
-  return packaging;
-};
-
-export default function ProductClassification() {
+export default function TakeTrainingData() {
   const webcamRef = React.useRef(null);
-  const [imgSrc, setImgSrc] = React.useState(null);
-  const [dimension, setDimension] = React.useState({
-    height: 0,
-    width: 0,
-  });
+  const [imgSrc, setImgSrc] = React.useState([]);
+
 
   const [loading, setLoading] = useState(false);
-  const [packageSize, setPackageSize] = useState("");
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc);
+    const imageSrc = webcamRef.current.getScreenshot({width: 500, height: 500});
+    setImgSrc(prev => [...prev, imageSrc]);
+
   }, [webcamRef, setImgSrc]);
+
+  console.log(imgSrc)
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -64,12 +43,6 @@ export default function ProductClassification() {
           },
         }
       );
-      setDimension({
-        height: res.data.height,
-        width: res.data.width,
-      });
-      const packaging = getPackage(res.data.height, res.data.width);
-      setPackageSize(packaging);
       setLoading(false);
       console.log(res.data);
     } catch (err) {
@@ -82,21 +55,24 @@ export default function ProductClassification() {
     <>
       {loading === false ? (
         <>
-          <div className="productClassification">
+          <div style={{height: "500px", width: "500px"}}>
             <>
               <Webcam
                 audio={false}
+                
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
               />
               <button onClick={capture}>Capture photo</button>
               <button onClick={onSubmit}>Send</button>
-              {imgSrc && <img src={imgSrc} />}
+              {
+                imgSrc.length !== 0 && imgSrc.map((ele, idx)=> {
+                  return <img src={ele} id = {idx}/>
+                })
+              }
+             
             </>
           </div>
-          {/* <p>Height: {dimension.height}</p>
-          <p>Width: {dimension.width}</p>
-          <p>Packaging: {packageSize}</p> */}
         </>
       ) : (
         <p>Loading... | Please wait</p>
