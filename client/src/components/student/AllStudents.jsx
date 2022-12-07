@@ -1,7 +1,6 @@
 import "./all-students.scss";
 import axios from "axios"
 import { DataGrid } from "@mui/x-data-grid";
-// import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
