@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      {isLoggedIn === true ? (
+     
         <div className="navbar">
         <div className="wrapper">
           <div className="search">
@@ -44,9 +44,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      ): (
-        <div></div>
-      )}
+      
 
     </div>
     

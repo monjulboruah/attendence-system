@@ -4,8 +4,10 @@ import "./allpages.scss";
 import { Switch, Route } from "react-router-dom";
 import TakeAttendence from "../components/attendence/TakeAttendence"
 import TakeTrainingData from "../components/attendence/TakeTrainingData"
-// import Sidebar from "./sidebar/Sidebar";
+import Sidebar from "./sidebar/SideBar";
 import Navbar from "./navbar/Navbar";
+import ViewAttendence from "./attendence/ViewAttendence"
+
 
 // //Landing page
 // import LandingPage from "./homepage/LandingPage";
@@ -39,19 +41,26 @@ function AllPages() {
     <>
       <div className="home">
         {/* {isLoggedIn ? <Sidebar /> : <></>} */}
+        <Sidebar/>
         <div className="homeContainer">
-          {isLoggedIn ? <Navbar /> : <></>}
+          {/* {isLoggedIn ? <Navbar /> : <></>} */}
+          <Navbar/>
           <div>
             <Switch>
             <Route
-                path="/test"
+                path="/take-attendance"
                 exact
                 component={TakeAttendence}
               />
                <Route
-                path="/test2"
+                path="/add-training-data"
                 exact
                 component={TakeTrainingData}
+              />
+              <Route
+                path="/view-attendence"
+                exact
+                component={ViewAttendence}
               />
               {/* <Route
                 path="/"

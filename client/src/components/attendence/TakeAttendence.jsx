@@ -61,11 +61,16 @@ export default function TakeAttendence() {
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
               />
+              
+            </>
+          </div>
+          <div style={{position: "absolute"}}>
               <button onClick={capture}>Capture photo</button>
               <button onClick={onSubmit}>Send</button>
               {imgSrc && <img src={imgSrc} />}
-            </>
+
           </div>
+         
           {/* <p>Height: {dimension.height}</p>
           <p>Width: {dimension.width}</p>
           <p>Packaging: {packageSize}</p> */}
