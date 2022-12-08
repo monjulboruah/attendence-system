@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalState } from "../GlobalState";
 import "./allpages.scss";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import TakeAttendence from "../components/attendence/TakeAttendence"
 import TakeTrainingData from "../components/attendence/TakeTrainingData"
 import Sidebar from "./sidebar/SideBar";
@@ -11,27 +11,11 @@ import AllStudents from "../components/student/AllStudents"
 import CreateStudent from "./student/CreateStrudents";
 import Dashboard from "./dashboard/Dashboard"
 
-// //Landing page
-// import LandingPage from "./homepage/LandingPage";
-// import Home from "../pages/home/Home";
-// //auth
-// import Login from "../pages/auth/Login";
-// import Register from "../pages/auth/Register";
+
 import Loading from "../utils/Loading";
 
 
-// //incident
-// import AllIncident from "./incident/AllIncident";
-// import CreateIncident from "./incident/CreateIncident";
-// import EditIncident from "./incident/EditIncident";
-// import MyIncident from "./incident/MyIncident";
 
-// //zone
-// import AllZones from "./zone/AllZones";
-// import CreateZone from "./zone/CreateZone";
-
-// //product-classification
-// import ProductClassification from "./productclassification/ProductClassification";
 
 function AllPages() {
   const state = useContext(GlobalState);
@@ -48,98 +32,41 @@ function AllPages() {
           {/* {isLoggedIn ? <Navbar /> : <></>} */}
           <Navbar/>
           <div>
-            <Switch>
+            <Routes>
             <Route
-                path="/"
                 exact
-                component={Dashboard}
+                path="/"
+                element={<Dashboard/>}
               />
             <Route
+                exact
                 path="/take-attendance"
-                exact
-                component={TakeAttendence}
+                element={<TakeAttendence/>}
               />
                <Route
+                exact
                 path="/add-training-data"
-                exact
-                component={TakeTrainingData}
+                element={<TakeTrainingData/>}
               />
               <Route
+                exact
                 path="/view-attendence"
-                exact
-                component={ViewAttendence}
+                element={<ViewAttendence/>}
               />
               <Route
-                path="/all-students"
                 exact
-                component={AllStudents}
+                path="/all-students"
+                element={<AllStudents/>}
               />
                <Route
+                exact
                 path="/create-student"
-                exact
-                component={CreateStudent}
+                element={<CreateStudent/>}
               />
-              {/* <Route
-                path="/"
-                exact
-                component={isLoggedIn ? Home : LandingPage}
-              />
-              <Route
-                path="/login"
-                exact
-                component={isLoggedIn ? Home : Login}
-              />
-              <Route
-                path="/register"
-                exact
-                component={isLoggedIn ? Home : Register}
-              />
-              <Route
-                path="/dashboard"
-                exact
-                component={isLoggedIn ? Home : Loading}
-              />
-
-              <Route
-                path="/create-incident"
-                exact
-                component={isLoggedIn ? CreateIncident : Loading}
-              />
-              <Route
-                path="/all-incident"
-                exact
-                component={role === "admin" ? AllIncident : Loading}
-              />
-              <Route
-                path="/edit-incident/:id/:pinCode"
-                exact
-                component={role === "admin" ? EditIncident : Loading}
-              />
-              <Route
-                path="/my-incident"
-                exact
-                component={isLoggedIn ? MyIncident : LandingPage}
-              />
-
-              <Route
-                path="/create-zone"
-                exact
-                component={role === "admin" ? CreateZone : Loading}
-              />
-              <Route
-                path="/all-zone"
-                exact
-                component={role === "admin" ? AllZones : Loading}
-              />
-
-              <Route
-                path="/product-classification"
-                exact
-                component={ProductClassification}
-              /> */}
+             
 
               <Route path="*" exact component={Loading} />
-            </Switch>
+            </Routes>
           </div>
         </div>
       </div>
