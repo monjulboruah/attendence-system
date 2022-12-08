@@ -2,7 +2,12 @@ import React from "react";
 import Webcam from "react-webcam";
 import { useState } from "react";
 import axios from "axios";
-//import { WriteFile } from "./WriteFile";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import SendIcon from '@mui/icons-material/Send';
 
 
 export default function TakeAttendence() {
@@ -54,31 +59,39 @@ export default function TakeAttendence() {
     <>
       {loading === false ? (
         <>
-          <div className="productClassification">
-            <>
-              <Webcam
-                audio={false}
-                ref={webcamRef}
-                forceScreenshotSourceSize
-                videoConstraints={{
-                  height: 500,
-                  width: 500
-                }}
-                screenshotFormat="image/jpeg"
-              />
-              
-            </>
-          </div>
-          <div style={{position: "absolute"}}>
-              <button onClick={capture}>Capture photo</button>
-              <button onClick={onSubmit}>Send</button>
-              {imgSrc && <img src={imgSrc} />}
 
-          </div>
-         
-          {/* <p>Height: {dimension.height}</p>
-          <p>Width: {dimension.width}</p>
-          <p>Packaging: {packageSize}</p> */}
+
+          <Box sx={{ flexGrow: 1, padding: 5 }}>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  forceScreenshotSourceSize
+                  videoConstraints={{
+                    height: 500,
+                    width: 500
+                  }}
+                  screenshotFormat="image/jpeg"
+                  />
+                </Grid>
+            </Grid>
+          </Box>
+
+          <Box sx={{ flexGrow: 1 }}>
+            <Stack spacing={2} justifyContent="center" direction="row">
+              <Button variant="contained" color="success" onClick={capture} endIcon={<CameraAltIcon />}>Capture</Button>
+              <Button variant="contained" onClick={onSubmit} endIcon={<SendIcon/>}>Send</Button>
+            </Stack>
+          </Box>
+
+          <Box sx={{ flexGrow: 1, padding: 5 }}>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  {imgSrc && <img src={imgSrc} />}
+                </Grid>
+              </Grid>
+          </Box>
         </>
       ) : (
         <p>Loading... | Please wait</p>

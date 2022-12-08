@@ -2,7 +2,12 @@ import React from "react";
 import Webcam from "react-webcam";
 import { useState } from "react";
 import axios from "axios";
-
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import SendIcon from '@mui/icons-material/Send';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 export default function TakeTrainingData() {
   const webcamRef = React.useRef(null);
@@ -55,23 +60,43 @@ export default function TakeTrainingData() {
     <>
       {loading === false ? (
         <>
-          <div style={{height: "500px", width: "500px"}}>
+          <div>
             <>
-              <Webcam
-                audio={false}
-                
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-              />
-              <button onClick={capture}>Capture photo</button>
-              <button onClick={onSubmit}>Send</button>
-              {
-                imgSrc.length !== 0 && imgSrc.map((ele, idx)=> {
-                  return <img src={ele} id = {idx}/>
-                })
-              }
-             
-            </>
+            <Box sx={{ flexGrow: 1, padding: 5 }}>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  forceScreenshotSourceSize
+                  videoConstraints={{
+                    height: 500,
+                    width: 500
+                  }}
+                  screenshotFormat="image/jpeg"
+                  />
+                </Grid>
+            </Grid>
+          </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Stack spacing={2} justifyContent="center" direction="row">
+            <Button variant="contained" color="success" onClick={capture} endIcon={<CameraAltIcon />}>Capture</Button>
+            <Button variant="contained" onClick={onSubmit} endIcon={<SendIcon/>}>Send</Button>
+          </Stack>
+        </Box>
+      
+          <Box sx={{ flexGrow: 1, padding: 5 }}>
+            <Grid container spacing={2}>
+            {
+              imgSrc.length !== 0 && imgSrc.map((ele, idx)=> {
+                return ( <Grid item xs={6}> <img src={ele} id = {idx}/> </Grid>)
+              })
+            }
+            </Grid>
+          </Box>
+          
+           
+          </>
           </div>
         </>
       ) : (
