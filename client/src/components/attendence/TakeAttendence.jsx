@@ -60,6 +60,14 @@ export default function TakeAttendence() {
       {loading === false ? (
         <>
 
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container justifyContent="center">
+              <Grid item>
+              <h1 style={{color: "black"}}>Capture image of the class for taking attendence</h1>
+              </Grid>
+          </Grid>
+        </Box>
+             
 
           <Box sx={{ flexGrow: 1, padding: 5 }}>
               <Grid container justifyContent="center">
@@ -84,6 +92,12 @@ export default function TakeAttendence() {
               <Button variant="contained" onClick={onSubmit} endIcon={<SendIcon/>}>Send</Button>
             </Stack>
           </Box>
+
+          <Box sx={{ flexGrow: 1 }}>
+          <Grid container justifyContent="center">
+          <h1 style={{color: "black"}}>Preview</h1>
+          </Grid>
+        </Box>
 
           <Box sx={{ flexGrow: 1, padding: 5 }}>
               <Grid container justifyContent="center">

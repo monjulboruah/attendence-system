@@ -6,19 +6,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import {Link} from "@mui/material"
 import {GlobalState} from "../../GlobalState"
-
+import AddIcon from '@mui/icons-material/Add';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const CreateStudent = () => {
 
   const state = useContext(GlobalState);
   const [role] = state.role;
   const [isLoggedIn] = state.isLoggedIn;
-  
-
-
-
-  
-
 
   const [studentData, setStudentData] = useState({
    name: "",
@@ -86,8 +81,8 @@ const CreateStudent = () => {
       <div className="newContainer">
         <div className="top">
           <div style={{paddingLeft: "450px"}}>
-          <Button variant="contained" style={{marginLeft: "12px"}}>Add Student</Button>
-          <Button variant="contained" style={{marginLeft: "12px"}}>Take Images</Button>
+          <Button variant="contained" color="success" endIcon={<AddIcon/>} style={{marginLeft: "12px"}}>Add Student</Button>
+          <Button variant="contained" color="info" endIcon={<AddAPhotoIcon/>} href="/add-training-data" style={{marginLeft: "12px"}}>Take Images</Button>
           </div>
           
         </div>

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import {GlobalState} from "../../GlobalState"
 import Button from '@mui/material/Button';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 const Sidebar = () => {
   const state = useContext(GlobalState);
@@ -29,102 +30,76 @@ const Sidebar = () => {
            
   return (
     <div>
-     
-          <div className="sidebar">
-            <div className="top">
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <span className="logo">attenD</span>
-              </Link>
-            </div>
-            <hr />
-            <div className="center">
-              <ul>
+      <div className="sidebar">
+        <div className="top">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span className="logo">attenD</span>
+          </Link>
+        </div>
+
+          <hr />
+            
+        <div className="center">
+          <ul>
             <p className="title">MAIN</p>
-           
-             
-                 
-                    <Link to="/" style={{ textDecoration: "none" }}>
-            <li>
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-            </Link>
-                
-             
-           
-           
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <li>
+                  <DashboardIcon className="icon" />
+                    <span>Dashboard</span>
+                </li>
+              </Link>
               
-                 <p className="title">Student Management</p>
-                <Link to="/all-students" style={{ textDecoration: "none" }}>
-                  <li>
-                    <PersonOutlineIcon className="icon" />
+            <p className="title">Student Management</p>
+              <Link to="/all-students" style={{ textDecoration: "none" }}>
+                <li>
+                  <PersonOutlineIcon className="icon" />
                     <span>All Student</span>
-                  </li>
-                </Link>
-                <Link to="/create-student" style={{ textDecoration: "none" }}>
-                  <li>
-                    <StoreIcon className="icon" />
+                </li>
+              </Link>
+              
+              <Link to="/create-student" style={{ textDecoration: "none" }}>
+                <li>
+                  <StoreIcon className="icon" />
                     <span>Add Student</span>
-                  </li>
-                </Link> 
+                </li>
+              </Link> 
                
-             
-           
-
             <p className="title">Attendence Management</p>
-            <Link to="/view-attendence" style={{ textDecoration: "none" }}>
-            <li>
-              <SettingsSystemDaydreamOutlinedIcon className="icon" />
-              <span>View Attendance</span>
-            </li>
-            </Link>
+              <Link to="/view-attendence" style={{ textDecoration: "none" }}>
+                <li>
+                  <SettingsSystemDaydreamOutlinedIcon className="icon" />
+                  <span>View Attendance</span>
+                </li>
+              </Link>
 
-            <Link to="/attendance-report" style={{ textDecoration: "none" }}>
-            <li>
-              <SettingsSystemDaydreamOutlinedIcon className="icon" />
-              <span>Attendence Report</span>
-            </li>
-            </Link>
+              <Link to="/attendance-report" style={{ textDecoration: "none" }}>
+                <li>
+                  <SettingsSystemDaydreamOutlinedIcon className="icon" />
+                  <span>Attendence Report</span>
+                </li>
+              </Link>
            
            
-                  <Link to="/send-email" style={{ textDecoration: "none" }}>
-            <li>
-              <PsychologyOutlinedIcon className="icon" />
-              <span>Send Email</span>
-            </li>
-            </Link>
+              <Link to="/send-email" style={{ textDecoration: "none" }}>
+                <li>
+                  <PsychologyOutlinedIcon className="icon" />
+                  <span>Send Email</span>
+                </li>
+              </Link>
+            
             <p className="title">Take Attendence</p>
-            <Link to="/take-attendance" style={{ textDecoration: "none" }}>
-            <li>
-              <SettingsSystemDaydreamOutlinedIcon className="icon" />
-              <span>Take Attedence</span>
-            </li>
-            </Link>
-             
-
-            
-            
+              <Link to="/take-attendance" style={{ textDecoration: "none" }}>
+                <li>
+                  <SettingsSystemDaydreamOutlinedIcon className="icon" />
+                  <span>Take Attedence</span>
+                </li>
+              </Link>
           </ul>
 
-         
-
-          <Button variant="contained" onClick={Logout} style={{marginLeft : "auto", marginRight : "auto", marginTop: "10px"}}>Logout</Button>
-          
-        </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-        
-        ></div>
-        <div
-          className="colorOption"
-         
-        ></div>
+        <Button variant="contained" color="warning" endIcon={<PowerSettingsNewIcon/>} onClick={Logout} style={{marginLeft : "auto", marginRight : "auto", marginTop: "10px"}}>Logout</Button>
       </div>
-    </div>
-       
-    </div>
-    
+    </div>   
+  </div>
   );
 };
 
