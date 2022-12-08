@@ -59,6 +59,11 @@ export default function TakeAttendence() {
               <Webcam
                 audio={false}
                 ref={webcamRef}
+                forceScreenshotSourceSize
+                videoConstraints={{
+                  height: 500,
+                  width: 500
+                }}
                 screenshotFormat="image/jpeg"
               />
               
