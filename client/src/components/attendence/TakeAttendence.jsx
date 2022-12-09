@@ -11,6 +11,49 @@ import SendIcon from '@mui/icons-material/Send';
 
 
 
+const getAttendence = (pres) => {
+  if(parseInt(pres) === 23){
+    return(
+      <div>
+        <p>{pres}</p>
+        <p>Monjul Boruah</p>
+      </div>
+    )
+  }else if(parseInt(pres) === 29){
+    return (
+      <div>
+        <p>{pres}</p>
+        <p>
+          Joysankar Saikia
+        </p>
+      </div>
+    )
+  }else{
+    return (
+      <div>
+        <p>{pres}</p>
+        <p>
+          Suraj Jyoti Hazarika
+        </p>
+      </div>
+    )
+  }
+}
+
+const studentData = [
+  {
+    schId: 23,
+    name: "Monjul Boruah"
+  },
+  {
+    schId: 29,
+    name: "Joysankar Saikia"
+  },
+  {
+    schId: 59,
+    name: "Suraj Jyoti Hazarika"
+  }
+]
 export default function TakeAttendence() {
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
@@ -106,11 +149,18 @@ export default function TakeAttendence() {
                 </Grid>
               </Grid>
           </Box>
-          <div>
+          <Box sx={{ flexGrow: 1, padding: 5 }}>
+            <Grid container justifyContent="center">
+              <Grid item lg={12}>
+                <h2>Students Present</h2>
+              </Grid>
+              <Grid item lg={12}>
             {
-               pres.length === 0 ? (<></>) : (<p>{pres}</p>)
+              getAttendence(pres)
             }
-          </div>
+              </Grid>
+            </Grid>
+          </Box>
         </>
        
 

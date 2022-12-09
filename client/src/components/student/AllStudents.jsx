@@ -81,7 +81,7 @@ const Datatable = () => {
           loading ? <p>Loading... | Please Wait</p>: (
             <>
               <div className="datatableTitle">
-                  Attedence List
+                  Students List
                   <Link to="/create-student" className="link">
                     Add New
                   </Link>
