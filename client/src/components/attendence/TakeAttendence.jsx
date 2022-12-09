@@ -10,9 +10,11 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import SendIcon from '@mui/icons-material/Send';
 
 
+
 export default function TakeAttendence() {
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState(null);
+  const[pres, setPres] = useState([])
   
 
   const [loading, setLoading] = useState(false);
@@ -23,38 +25,36 @@ export default function TakeAttendence() {
   }, [webcamRef, setImgSrc]);
 
   const onSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
-    setLoading(true);
-
-    let imageData = {
-      base64Image: imgSrc,
-      fileName: "test.jpg",
-    };
-
-    let { base64Image, fileName } = imageData;
-
-    try {
-      let res = await axios.post(
-        "http://localhost:5001/upload/get-dimension",
-        {
-          base64Image,
-          fileName,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
+    // let form_data = new FormData();
+    const img = imgSrc.replace(/^data:image\/(jpg);base64,/, "") ;
+    console.log(img)
     
-      setLoading(false);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+   const data = {
+    img: img
+   }
+
+
+
+    fetch("http://127.0.0.1:5000/upload-test-image", {
+      method: "POST",
+      headers: {
+      'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(data)
+      }).then((res) => {
+        res.json().then((data)=> {
+          setLoading(false)
+          setPres(data.schId)
+          console.log(data)
+        })
+      })
+      
+   
   };
 
-  console.log(imgSrc);
+ // console.log(imgSrc);
   return (
     <>
       {loading === false ? (
@@ -106,7 +106,16 @@ export default function TakeAttendence() {
                 </Grid>
               </Grid>
           </Box>
+          <div>
+            {
+               pres.length === 0 ? (<></>) : (<p>{pres}</p>)
+            }
+          </div>
         </>
+       
+
+       
+       
       ) : (
         <p>Loading... | Please wait</p>
       )}
