@@ -45,7 +45,7 @@ export default function TakeTrainingData() {
   };
 
   const uploadFiles = (base64Images) => {
-    fetch('http://127.0.0.1:5000/upload-train-image', {
+    fetch('http://104.45.148.31:5000/upload-train-image', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
