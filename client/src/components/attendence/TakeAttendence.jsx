@@ -50,7 +50,7 @@ export default function TakeAttendence() {
       img: img,
     };
 
-    fetch("http://127.0.0.1:5000/upload-test-image", {
+    fetch("http://104.45.148.31:5000/upload-test-image", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
