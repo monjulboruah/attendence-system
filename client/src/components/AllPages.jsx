@@ -10,9 +10,11 @@ import ViewAttendence from "./attendence/ViewAttendence"
 import AllStudents from "../components/student/AllStudents"
 import CreateStudent from "./student/CreateStrudents";
 import Dashboard from "./dashboard/Dashboard"
+import TrainData from "./train-data/TrainData";
 
 
 import Loading from "../utils/Loading";
+import { Drawer } from "@mui/material";
 
 
 
@@ -27,7 +29,7 @@ function AllPages() {
     <>
       <div className="home">
         {/* {isLoggedIn ? <Sidebar /> : <></>} */}
-        <Sidebar/>
+        <Drawer/>
         <div className="homeContainer">
           {/* {isLoggedIn ? <Navbar /> : <></>} */}
           <Navbar/>
@@ -63,7 +65,11 @@ function AllPages() {
                 path="/create-student"
                 element={<CreateStudent/>}
               />
-             
+              <Route
+                exact
+                path="/train-data"
+                element={<TrainData/>}
+              />
 
               <Route path="*" exact component={Loading} />
             </Routes>

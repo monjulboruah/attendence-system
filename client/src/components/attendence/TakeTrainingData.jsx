@@ -8,6 +8,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { resolveComponentProps } from "@mui/base";
 
 export default function TakeTrainingData() {
   const webcamRef = React.useRef(null);
@@ -25,34 +26,35 @@ export default function TakeTrainingData() {
   console.log(imgSrc)
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    const base64Images = [];
 
-    let imageData = {
-      base64Image: imgSrc,
-      fileName: "test.jpg",
-    };
-
-    let { base64Image, fileName } = imageData;
-
-    try {
-      let res = await axios.post(
-        "http://localhost:5001/upload/get-dimension",
-        {
-          base64Image,
-          fileName,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
+    for (let i = 0; i < imgSrc.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(imgSrc[i]);
+  
+      reader.onload = () => {
+        base64Images.push(reader.result);
+        if (base64Images.length === imgSrc.length) {
+          uploadFiles(base64Images);
         }
-      );
-      setLoading(false);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
+      };
     }
+  
+     // fetch('http://127.0.0.1:5000/upload-train-image'
+        
+  };
+
+  const uploadFiles = (base64Images) => {
+    fetch('http://127.0.0.1:5000/upload-train-image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ images: base64Images }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   };
 
   console.log(imgSrc);

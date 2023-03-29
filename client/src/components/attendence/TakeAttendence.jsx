@@ -10,36 +10,6 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import SendIcon from '@mui/icons-material/Send';
 
 
-
-const getAttendence = (pres) => {
-  if(parseInt(pres) === 23){
-    return(
-      <div>
-        <p>{pres}</p>
-        <p>Monjul Boruah</p>
-      </div>
-    )
-  }else if(parseInt(pres) === 29){
-    return (
-      <div>
-        <p>{pres}</p>
-        <p>
-          Joysankar Saikia
-        </p>
-      </div>
-    )
-  }else{
-    return (
-      <div>
-        <p>{pres}</p>
-        <p>
-          Suraj Jyoti Hazarika
-        </p>
-      </div>
-    )
-  }
-}
-
 const studentData = [
   {
     schId: 23,
@@ -88,6 +58,7 @@ export default function TakeAttendence() {
       body: JSON.stringify(data)
       }).then((res) => {
         res.json().then((data)=> {
+          console.log(data)
           setLoading(false)
           setPres(data.schId)
           console.log(data)
@@ -106,7 +77,7 @@ export default function TakeAttendence() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container justifyContent="center">
               <Grid item>
-              <h1 style={{color: "black"}}>Capture image of the class for taking attendence</h1>
+              <h1 style={{color: "black"}}>Capture image of the class for taking attendance</h1>
               </Grid>
           </Grid>
         </Box>
@@ -156,7 +127,15 @@ export default function TakeAttendence() {
               </Grid>
               <Grid item lg={12}>
             {
-              getAttendence(pres)
+             pres.length !== 0 && pres.map((schId, idx)=> {
+                return(
+                  <div id={idx}>
+                   <p>{schId}</p>
+                   <p>{schId === 23 ? "Monjul Boruah" : schId === 29 ? "Joysankar Saikia" : schId === 59 ?
+              "Surajjyoti Hazarika" : "Unknown"}</p>
+                  </div>
+                )
+              })
             }
               </Grid>
             </Grid>

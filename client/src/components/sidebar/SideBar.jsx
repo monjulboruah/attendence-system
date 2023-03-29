@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import {GlobalState} from "../../GlobalState"
 import Button from '@mui/material/Button';
+// import Drawer from '@mui/material/Drawer';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 const Sidebar = () => {
@@ -31,6 +32,8 @@ const Sidebar = () => {
   return (
     <div>
       <div className="sidebar">
+
+
         <div className="top">
           <Link to="/" style={{ textDecoration: "none" }}>
             <span className="logo">attenD</span>
@@ -64,7 +67,7 @@ const Sidebar = () => {
                 </li>
               </Link> 
                
-            <p className="title">Attendence Management</p>
+            <p className="title">Attendance Management</p>
               <Link to="/view-attendence" style={{ textDecoration: "none" }}>
                 <li>
                   <SettingsSystemDaydreamOutlinedIcon className="icon" />
@@ -75,7 +78,7 @@ const Sidebar = () => {
               <Link to="/attendance-report" style={{ textDecoration: "none" }}>
                 <li>
                   <SettingsSystemDaydreamOutlinedIcon className="icon" />
-                  <span>Attendence Report</span>
+                  <span>Attendance Report</span>
                 </li>
               </Link>
            
@@ -87,11 +90,11 @@ const Sidebar = () => {
                 </li>
               </Link>
             
-            <p className="title">Take Attendence</p>
+            <p className="title">Take Attandence</p>
               <Link to="/take-attendance" style={{ textDecoration: "none" }}>
                 <li>
                   <SettingsSystemDaydreamOutlinedIcon className="icon" />
-                  <span>Take Attedence</span>
+                  <span>Take Attedance</span>
                 </li>
               </Link>
           </ul>
