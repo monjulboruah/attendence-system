@@ -50,11 +50,14 @@ export default function TakeAttendence() {
       img: img,
     };
 
-    fetch("http://104.45.148.31:5000/upload-test-image", {
+    //http://127.0.0.1:5000
+ 
+    fetch("https://attendence-system-wwi4.onrender.com/upload-test-image", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      mode:'cors',
       body: JSON.stringify(data),
     }).then((res) => {
       return res.json();

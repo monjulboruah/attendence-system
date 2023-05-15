@@ -9,54 +9,45 @@ import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { resolveComponentProps } from "@mui/base";
+import { Link } from "react-router-dom";
 
 export default function TakeTrainingData() {
   const webcamRef = React.useRef(null);
-  const [imgSrc, setImgSrc] = React.useState([]);
+  const [imgSrc, setImgSrc] = React.useState(null);
 
 
   const [loading, setLoading] = useState(false);
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot({width: 500, height: 500});
-    setImgSrc(prev => [...prev, imageSrc]);
-
+    setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
   console.log(imgSrc)
 
   const onSubmit = async (e) => {
-    const base64Images = [];
+    setLoading(true);
+    e.preventDefault();
+    // let form_data = new FormData();
+    const img = imgSrc.replace(/^data:image\/(jpg);base64,/, "");
+    console.log(img);
 
-    for (let i = 0; i < imgSrc.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(imgSrc[i]);
-  
-      reader.onload = () => {
-        base64Images.push(reader.result);
-        if (base64Images.length === imgSrc.length) {
-          uploadFiles(base64Images);
-        }
-      };
-    }
-  
-     // fetch('http://127.0.0.1:5000/upload-train-image'
-        
-  };
-
-  const uploadFiles = (base64Images) => {
-    fetch('http://104.45.148.31:5000/upload-train-image', {
-      method: 'POST',
+    const data = {
+      img: img,
+    };
+ 
+    fetch("http://127.0.0.1:5000/upload-train-image", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ images: base64Images }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+      body: JSON.stringify(data),
+    }).then((data) => {
+      console.log(data);
+      setLoading(false);
+    });
   };
-
+  
   console.log(imgSrc);
   return (
     <>
@@ -89,11 +80,10 @@ export default function TakeTrainingData() {
       
           <Box sx={{ flexGrow: 1, padding: 5 }}>
             <Grid container spacing={2}>
-            {
-              imgSrc.length !== 0 && imgSrc.map((ele, idx)=> {
-                return ( <Grid item xs={6}> <img src={ele} id = {idx}/> </Grid>)
-              })
-            }
+           
+             { imgSrc !== null ? <Grid item xs={6}> <img src={imgSrc} /> </Grid> : <></>}
+                
+          
             </Grid>
           </Box>
           
